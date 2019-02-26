@@ -3,6 +3,8 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using Network = ZeroTierAPI.Network;
+using Member = ZeroTierAPI.Member;
 using ZeroTierHelper.Properties;
 
 #endregion
@@ -106,9 +108,9 @@ namespace ZeroTierHelper
 
             try
             {
-                IEnumerable<Network> networks = ZeroTierAPI.GetNetworks(Settings.Default.APIToken);
+                IEnumerable<Network> networks = ZeroTierAPI.Requests.GetNetworks(Settings.Default.APIToken);
                 CreateTabPages(networks);
-                IDictionary<Network, IList<Member>> networkMembers = ZeroTierAPI.GetMembers(Settings.Default.APIToken, networks);
+                IDictionary<Network, IList<Member>> networkMembers = ZeroTierAPI.Requests.GetMembers(Settings.Default.APIToken, networks);
                 CreateDataGrids(networkMembers);
             }
             catch (Exception ex)

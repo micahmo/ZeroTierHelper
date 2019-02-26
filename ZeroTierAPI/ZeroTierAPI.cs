@@ -4,15 +4,16 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System.Linq;
+using WebHelper;
 
 #endregion
 
-namespace ZeroTierHelper
+namespace ZeroTierAPI
 {
     /// <summary>
     /// Class containing wrapper methods which call the ZeroTier API
     /// </summary>
-    class ZeroTierAPI
+    public class Requests
     {
         #region Public static methods
 

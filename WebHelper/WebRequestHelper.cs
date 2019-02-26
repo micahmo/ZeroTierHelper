@@ -6,7 +6,7 @@ using System.Net;
 
 #endregion
 
-namespace ZeroTierHelper
+namespace WebHelper
 {
     /// <summary>
     /// Class containing helper methods for web requests

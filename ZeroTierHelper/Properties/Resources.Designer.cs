@@ -212,14 +212,5 @@ namespace ZeroTierHelper.Properties {
                 return ResourceManager.GetString("VersionNumber", resourceCulture);
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Error retrieving web request: &quot;{0}&quot;.
-        /// </summary>
-        internal static string WebRequsetError {
-            get {
-                return ResourceManager.GetString("WebRequsetError", resourceCulture);
-            }
-        }
     }
 }

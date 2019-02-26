@@ -1,4 +1,4 @@
-﻿namespace ZeroTierHelper
+﻿namespace ZeroTierAPI
 {
     /// <summary>
     /// Lightweight class representing a ZeroTier network member

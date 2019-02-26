@@ -1,4 +1,4 @@
-﻿namespace ZeroTierHelper
+﻿namespace ZeroTierAPI
 {
     /// <summary>
     /// A lightweight representation of a ZeroTier network

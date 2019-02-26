@@ -1,12 +1,22 @@
-﻿using System;
+﻿#region Usings
+
+using System;
 using System.Diagnostics;
 using System.Windows.Forms;
 using ZeroTierHelper.Properties;
+using Member = ZeroTierAPI.Member;
+
+#endregion
 
 namespace ZeroTierHelper
 {
     sealed class MemberDataGridView : DataGridView
     {
+        #region Constructor
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public MemberDataGridView()
         {
             Columns.AddRange(
@@ -73,6 +83,10 @@ namespace ZeroTierHelper
             AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
+        #endregion
+
+        #region Overrides
+
         protected override void OnCellClick(DataGridViewCellEventArgs e)
         {
             base.OnCellClick(e);
@@ -131,5 +145,7 @@ namespace ZeroTierHelper
             }
             return result;
         }
+
+        #endregion
     }
 }
