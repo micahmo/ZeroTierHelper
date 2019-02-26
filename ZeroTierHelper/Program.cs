@@ -19,7 +19,7 @@ namespace ZeroTierHelperClient
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error!\n\n{ex}");
+                MessageBox.Show(Properties.Resources.ErrorExclamation + Environment.NewLine + Environment.NewLine + ex.ToString());
             }
         }
     }

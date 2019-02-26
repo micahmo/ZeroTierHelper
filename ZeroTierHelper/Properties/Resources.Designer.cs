@@ -97,6 +97,15 @@ namespace ZeroTierHelperClient.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error!.
+        /// </summary>
+        internal static string ErrorExclamation {
+            get {
+                return ResourceManager.GetString("ErrorExclamation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to File Share.
         /// </summary>
         internal static string FileShare {
