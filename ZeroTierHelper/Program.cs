@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace ZeroTierHelper
+namespace ZeroTierHelperClient
 {
     static class Program
     {

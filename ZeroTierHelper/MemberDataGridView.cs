@@ -3,12 +3,12 @@
 using System;
 using System.Diagnostics;
 using System.Windows.Forms;
-using ZeroTierHelper.Properties;
+using ZeroTierHelperClient.Properties;
 using Member = ZeroTierAPI.Member;
 
 #endregion
 
-namespace ZeroTierHelper
+namespace ZeroTierHelperClient
 {
     sealed class MemberDataGridView : DataGridView
     {

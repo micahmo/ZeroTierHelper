@@ -1,4 +1,4 @@
-﻿namespace ZeroTierHelper
+﻿namespace ZeroTierHelperClient
 {
     partial class MainForm
     {

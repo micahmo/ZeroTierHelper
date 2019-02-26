@@ -1,4 +1,4 @@
-﻿namespace ZeroTierHelper
+﻿namespace ZeroTierHelperClient
 {
     partial class SettingsForm
     {
@@ -49,10 +49,10 @@
             // 
             // tbAPIToken
             // 
-            this.tbAPIToken.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ZeroTierHelper.Properties.Settings.Default, "APIToken", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.tbAPIToken.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ZeroTierHelperClient.Properties.Settings.Default, "APIToken", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             resources.ApplyResources(this.tbAPIToken, "tbAPIToken");
             this.tbAPIToken.Name = "tbAPIToken";
-            this.tbAPIToken.Text = global::ZeroTierHelper.Properties.Settings.Default.APIToken;
+            this.tbAPIToken.Text = global::ZeroTierHelperClient.Properties.Settings.Default.APIToken;
             // 
             // lblAPIInfo
             // 

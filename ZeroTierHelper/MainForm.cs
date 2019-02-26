@@ -5,11 +5,11 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using Network = ZeroTierAPI.Network;
 using Member = ZeroTierAPI.Member;
-using ZeroTierHelper.Properties;
+using ZeroTierHelperClient.Properties;
 
 #endregion
 
-namespace ZeroTierHelper
+namespace ZeroTierHelperClient
 {
     /// <summary>
     /// MainForm class

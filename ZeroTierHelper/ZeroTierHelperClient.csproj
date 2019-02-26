@@ -7,8 +7,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{744282B6-DF55-4058-9911-152C413798F4}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>ZeroTierHelper</RootNamespace>
-    <AssemblyName>ZeroTierHelper</AssemblyName>
+    <RootNamespace>ZeroTierHelperClient</RootNamespace>
+    <AssemblyName>ZeroTierHelperClient</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -25,7 +25,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\ZeroTierHelper.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\ZeroTierHelperClient.xml</DocumentationFile>
     <NoWarn>
     </NoWarn>
     <WarningsAsErrors>1591</WarningsAsErrors>
