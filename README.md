@@ -7,7 +7,6 @@ It retrieves data about networks and members, and allows the user to initiate RD
 ![image](https://i.imgur.com/a8utLfG.png)
 
 # Short-Term To-Do
-* Enable localization (move strings to resources)
 * Clean up code (refactor/comment/etc)
 * Add some assets (icon)
 
