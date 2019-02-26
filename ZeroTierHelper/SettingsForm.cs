@@ -3,8 +3,14 @@ using System.Windows.Forms;
 
 namespace ZeroTierHelper
 {
+    /// <summary>
+    /// Form which displays settings
+    /// </summary>
     public partial class SettingsForm : Form
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public SettingsForm()
         {
             InitializeComponent();

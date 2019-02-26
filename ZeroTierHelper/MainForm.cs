@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿#region Usings
+
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -8,13 +10,20 @@ using System.Net;
 using System.Windows.Forms;
 using ZeroTierHelper.Properties;
 
+#endregion
+
 namespace ZeroTierHelper
 {
+    /// <summary>
+    /// MainForm class
+    /// </summary>
     public partial class MainForm : Form
     {
-
         #region Constructor
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public MainForm()
         {
             InitializeComponent();
@@ -24,21 +33,31 @@ namespace ZeroTierHelper
 
         #region Overrides
 
+        /// <summary>
+        /// Override the OnLoad
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
 
             if (string.IsNullOrEmpty(Settings.Default.APIToken) == false)
             {
-                btnRefresh.PerformClick();
+                DoRefresh();
             }
         }
 
+        /// <summary>
+        /// Override the CmdKey event so we can handle F5 and perform a refresh
+        /// </summary>
+        /// <param name="msg"></param>
+        /// <param name="keyData"></param>
+        /// <returns></returns>
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             if (keyData == Keys.F5)
             {
-                btnRefresh.PerformClick();
+                DoRefresh();
                 return true;
             }
             else
@@ -53,14 +72,38 @@ namespace ZeroTierHelper
 
         private void btnHelp_Click(object sender, EventArgs e)
         {
-            MessageBox.Show($"—————————— ZeroTier Helper Client ——————————\nVersion {Application.ProductVersion}\n\nAccess to your API token is needed to retrieve network and member data. Click on Settings to enter your API token.\n\nOnce your data is retrieved, each network will be shown on a new tab. Within that tab, a list of members will be displayed in a grid.\n\nThis data is static, so at any time you may press Refresh to retrieve the latest data.");
+            MessageBox.Show(Resources.HelpWindowHeader + Environment.NewLine +
+                string.Format(Resources.VersionNumber, Application.ProductVersion) + Environment.NewLine + Environment.NewLine +
+                Resources.APITokenHelp + Environment.NewLine + Environment.NewLine +
+                Resources.NetworkHelp + Environment.NewLine + Environment.NewLine +
+                Resources.DataHelp);
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
+            DoRefresh();
+        }
+
+        private void btnSettings_Click(object sender, EventArgs e)
+        {
+            ShowSettings();
+        }
+
+        #endregion
+
+        #region Private methods
+
+        private void ShowSettings()
+        {
+            new SettingsForm().ShowDialog();
+            Settings.Default.Save();
+        }
+
+        private void DoRefresh()
+        {
             if (string.IsNullOrEmpty(Settings.Default.APIToken))
             {
-                MessageBox.Show("API key is needed to access ZeroTier data. Please click on Settings and enter your API key.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(Resources.MissingAPITokenError, Resources.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -71,16 +114,6 @@ namespace ZeroTierHelper
             GetMembers();
             CreateDataGrids();
         }
-
-        private void btnSettings_Click(object sender, EventArgs e)
-        {
-            new SettingsForm().ShowDialog();
-            Settings.Default.Save();
-        }
-
-        #endregion
-
-        #region Private methods
 
         private void GetNetworks()
         {
@@ -231,7 +264,8 @@ namespace ZeroTierHelper
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error retrieving web request: \"{url}\"\n\n{ex}");
+                MessageBox.Show(string.Format(Resources.WebRequsetError, url) + Environment.NewLine + Environment.NewLine + 
+                    ex.ToString(), Resources.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return string.Empty;
             }
         }
