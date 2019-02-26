@@ -13,39 +13,39 @@ namespace ZeroTierHelper
             new DataGridViewTextBoxColumn
             {
                 Name = "Name",
-                HeaderText = "Name",
+                HeaderText = Resources.Name,
                 DataPropertyName = "Name"
             },
             new DataGridViewTextBoxColumn
             {
                 Name = "Description",
-                HeaderText = "Description",
+                HeaderText = Resources.Description,
                 DataPropertyName = "Description",
                 FillWeight = 150,
             },
             new DataGridViewTextBoxColumn
             {
                 Name = "ID",
-                HeaderText = "ID",
+                HeaderText = Resources.ID,
                 DataPropertyName = "ID",
             },
             new DataGridViewCheckBoxColumn
             {
                 Name = "Online",
-                HeaderText = "Online",
+                HeaderText = Resources.Online,
                 DataPropertyName = "Online",
                 FillWeight = 35
             },
             new DataGridViewTextBoxColumn
             {
                 Name = "IP Assignments",
-                HeaderText = "IP Assignments",
+                HeaderText = Resources.IPAssignments,
                 DataPropertyName = "IPAssignments"
             },
             new DataGridViewButtonColumn
             {
                 Name = "RDP",
-                Text = "RDP",
+                Text = Resources.RDP,
                 Tag = "RDP",
                 UseColumnTextForButtonValue = true,
                 FillWeight = 50
@@ -53,7 +53,7 @@ namespace ZeroTierHelper
             new DataGridViewButtonColumn
             {
                 Name = "File Share",
-                Text = "File Share",
+                Text = Resources.FileShare,
                 Tag = "File Share",
                 UseColumnTextForButtonValue = true,
                 FillWeight = 75
@@ -61,7 +61,7 @@ namespace ZeroTierHelper
             new DataGridViewButtonColumn
             {
                 Name = "Ping",
-                Text = "Ping",
+                Text = Resources.Ping,
                 Tag = "Ping",
                 UseColumnTextForButtonValue = true,
                 FillWeight = 50,

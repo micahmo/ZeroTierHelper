@@ -79,6 +79,15 @@ namespace ZeroTierHelper.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        internal static string Description {
+            get {
+                return ResourceManager.GetString("Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error.
         /// </summary>
         internal static string Error {
@@ -88,11 +97,38 @@ namespace ZeroTierHelper.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to File Share.
+        /// </summary>
+        internal static string FileShare {
+            get {
+                return ResourceManager.GetString("FileShare", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to —————————— ZeroTier Helper Client ——————————.
         /// </summary>
         internal static string HelpWindowHeader {
             get {
                 return ResourceManager.GetString("HelpWindowHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ID.
+        /// </summary>
+        internal static string ID {
+            get {
+                return ResourceManager.GetString("ID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IP Assignments.
+        /// </summary>
+        internal static string IPAssignments {
+            get {
+                return ResourceManager.GetString("IPAssignments", resourceCulture);
             }
         }
         
@@ -115,6 +151,15 @@ namespace ZeroTierHelper.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        internal static string Name {
+            get {
+                return ResourceManager.GetString("Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Once your data is retrieved, each network will be shown on a new tab. Within that tab, a list of members will be displayed in a grid..
         /// </summary>
         internal static string NetworkHelp {
@@ -129,6 +174,33 @@ namespace ZeroTierHelper.Properties {
         internal static string NoIPsAssignedToMember {
             get {
                 return ResourceManager.GetString("NoIPsAssignedToMember", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Online.
+        /// </summary>
+        internal static string Online {
+            get {
+                return ResourceManager.GetString("Online", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ping.
+        /// </summary>
+        internal static string Ping {
+            get {
+                return ResourceManager.GetString("Ping", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RDP.
+        /// </summary>
+        internal static string RDP {
+            get {
+                return ResourceManager.GetString("RDP", resourceCulture);
             }
         }
         

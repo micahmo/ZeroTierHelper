@@ -123,11 +123,23 @@
   <data name="DataHelp" xml:space="preserve">
     <value>This data is static, so at any time you may press Refresh to retrieve the latest data.</value>
   </data>
+  <data name="Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
   <data name="Error" xml:space="preserve">
     <value>Error</value>
   </data>
+  <data name="FileShare" xml:space="preserve">
+    <value>File Share</value>
+  </data>
   <data name="HelpWindowHeader" xml:space="preserve">
     <value>—————————— ZeroTier Helper Client ——————————</value>
+  </data>
+  <data name="ID" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="IPAssignments" xml:space="preserve">
+    <value>IP Assignments</value>
   </data>
   <data name="MissingAPITokenError" xml:space="preserve">
     <value>API key is needed to access ZeroTier data. Please click on Settings and enter your API key.</value>
@@ -135,11 +147,23 @@
   <data name="MultipleIPsAssignedToMember" xml:space="preserve">
     <value>There are multiple IP addressed assigned to this member, which is currently unsupported.</value>
   </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
   <data name="NetworkHelp" xml:space="preserve">
     <value>Once your data is retrieved, each network will be shown on a new tab. Within that tab, a list of members will be displayed in a grid.</value>
   </data>
   <data name="NoIPsAssignedToMember" xml:space="preserve">
     <value>There are no IP addresses assigned to this member.</value>
+  </data>
+  <data name="Online" xml:space="preserve">
+    <value>Online</value>
+  </data>
+  <data name="Ping" xml:space="preserve">
+    <value>Ping</value>
+  </data>
+  <data name="RDP" xml:space="preserve">
+    <value>RDP</value>
   </data>
   <data name="VersionNumber" xml:space="preserve">
     <value>Version {0}</value>
