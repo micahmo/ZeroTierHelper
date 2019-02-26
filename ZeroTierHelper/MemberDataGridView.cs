@@ -124,7 +124,10 @@ namespace ZeroTierHelper
                 result = member.IPAssignmentsList[0];
             }
 
-            Clipboard.SetText(result);    
+            if (string.IsNullOrEmpty(result) == false)
+            {
+                Clipboard.SetText(result);
+            }
             return result;
         }
     }
