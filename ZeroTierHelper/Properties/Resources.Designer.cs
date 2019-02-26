@@ -106,11 +106,29 @@ namespace ZeroTierHelper.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There are multiple IP addressed assigned to this member, which is currently unsupported..
+        /// </summary>
+        internal static string MultipleIPsAssignedToMember {
+            get {
+                return ResourceManager.GetString("MultipleIPsAssignedToMember", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Once your data is retrieved, each network will be shown on a new tab. Within that tab, a list of members will be displayed in a grid..
         /// </summary>
         internal static string NetworkHelp {
             get {
                 return ResourceManager.GetString("NetworkHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are no IP addresses assigned to this member..
+        /// </summary>
+        internal static string NoIPsAssignedToMember {
+            get {
+                return ResourceManager.GetString("NoIPsAssignedToMember", resourceCulture);
             }
         }
         

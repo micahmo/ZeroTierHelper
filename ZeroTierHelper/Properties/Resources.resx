@@ -132,8 +132,14 @@
   <data name="MissingAPITokenError" xml:space="preserve">
     <value>API key is needed to access ZeroTier data. Please click on Settings and enter your API key.</value>
   </data>
+  <data name="MultipleIPsAssignedToMember" xml:space="preserve">
+    <value>There are multiple IP addressed assigned to this member, which is currently unsupported.</value>
+  </data>
   <data name="NetworkHelp" xml:space="preserve">
     <value>Once your data is retrieved, each network will be shown on a new tab. Within that tab, a list of members will be displayed in a grid.</value>
+  </data>
+  <data name="NoIPsAssignedToMember" xml:space="preserve">
+    <value>There are no IP addresses assigned to this member.</value>
   </data>
   <data name="VersionNumber" xml:space="preserve">
     <value>Version {0}</value>

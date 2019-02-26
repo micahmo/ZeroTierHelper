@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Windows.Forms;
+using ZeroTierHelper.Properties;
 
 namespace ZeroTierHelper
 {
@@ -113,11 +114,11 @@ namespace ZeroTierHelper
 
             if (member.IPAssignmentsList.Count == 0)
             {
-                MessageBox.Show("There are no IP addressed assigned to this member.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(Resources.NoIPsAssignedToMember, Resources.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else if (member.IPAssignmentsList.Count > 1)
             {
-                MessageBox.Show("There are multiple IP addressed assigned to this member, which is currently unsupported.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(Resources.MultipleIPsAssignedToMember, Resources.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else if (member.IPAssignmentsList.Count == 1)
             {
