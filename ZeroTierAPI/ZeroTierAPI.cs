@@ -1,10 +1,8 @@
 ﻿#region Usings
 
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
-using System.Linq;
 using WebHelper;
+using JSONHelper;
 
 #endregion
 
@@ -27,31 +25,17 @@ namespace ZeroTierAPI
         {
             List<Network> networks = new List<Network>();
 
-            List<object> jsonNetworks = JsonConvert.DeserializeObject<List<object>>(WebRequestHelper.DoRequest(BASE_URL + GET_NETWORKS_COMMAND, apiToken));
+            IEnumerable<string> jsonNetworks = Serialization.JSONListToEnumerable(WebRequestHelper.DoRequest(BASE_URL + GET_NETWORKS_COMMAND, apiToken));
             foreach (var jsonNetwork in jsonNetworks)
             {
-                dynamic network = JObject.Parse(jsonNetwork.ToString());
-                string id = string.Empty;
-                string name = string.Empty;
-                foreach (JProperty jproperty in network)
-                {
-                    if (jproperty.Name == "id")
-                    {
-                        id = jproperty.Value.ToString();
-                    }
-                    else if (jproperty.Name == "config")
-                    {
-                        foreach (JProperty childjproperty in (dynamic)JObject.Parse(jproperty.Value.ToString()))
-                        {
-                            if (childjproperty.Name == "name")
-                            {
-                                name = childjproperty.Value.ToString();
-                            }
-                        }
-                    }
-                }
+                JSONProperty idProperty = new JSONProperty("id", 1, nameof(Network.ID));
+                JSONProperty nameProperty = new JSONProperty("name", 2, nameof(Network.Name));
+                Network network = new Network();
 
-                networks.Add(new Network { ID = id, Name = name });
+                Serialization.GetPropertiesFromJSON(jsonNetwork.ToString(), idProperty, nameProperty);
+                Serialization.PopulateObjectWithJSONProperties(network, false, idProperty, nameProperty);
+
+                networks.Add(network);
             }
 
             return networks;
@@ -72,55 +56,20 @@ namespace ZeroTierAPI
             {
                 networkMembers[network] = new List<Member>();
 
-                List<object> jsonNetworkMembers = JsonConvert.DeserializeObject<List<object>>(WebRequestHelper.DoRequest(BASE_URL + string.Format(GET_NETWORK_MEMBERS_COMMAND, network.ID), apiToken));
+                IEnumerable<string> jsonNetworkMembers = Serialization.JSONListToEnumerable(WebRequestHelper.DoRequest(BASE_URL + string.Format(GET_NETWORK_MEMBERS_COMMAND, network.ID), apiToken));
                 foreach (var jsonMember in jsonNetworkMembers)
                 {
-                    dynamic member = JObject.Parse(jsonMember.ToString());
-                    string name = string.Empty;
-                    string description = string.Empty;
-                    string id = string.Empty;
-                    bool online = default(bool);
-                    List<string> ips = new List<string>();
+                    JSONProperty nameProperty = new JSONProperty("name", 1, nameof(Member.Name));
+                    JSONProperty descriptionProperty = new JSONProperty("description", 1, nameof(Member.Description));
+                    JSONProperty nodeIdProeprty = new JSONProperty("nodeId", 1, nameof(Member.ID));
+                    JSONProperty onlineProperty = new JSONProperty("online", 1, nameof(Member.Online));
+                    JSONProperty ipAssignmentsProperty = new JSONProperty("ipAssignments", 2, nameof(Member.IPAssignmentsList));
+                    Member member = new Member();
 
-                    foreach (JProperty jproperty in member)
-                    {
-                        if (jproperty.Name == "name")
-                        {
-                            name = jproperty.Value.ToString();
-                        }
-                        else if (jproperty.Name == "description")
-                        {
-                            description = jproperty.Value.ToString();
-                        }
-                        else if (jproperty.Name == "nodeId")
-                        {
-                            id = jproperty.Value.ToString();
-                        }
-                        else if (jproperty.Name == "online")
-                        {
-                            online = bool.Parse(jproperty.Value.ToString());
-                        }
-                        else if (jproperty.Name == "config")
-                        {
-                            foreach (JProperty childjproperty in (dynamic)JObject.Parse(jproperty.Value.ToString()))
-                            {
-                                if (childjproperty.Name == "ipAssignments")
-                                {
-                                    List<object> ipAssignments = JsonConvert.DeserializeObject<List<object>>(childjproperty.Value.ToString());
-                                    ips = ipAssignments.Cast<string>().ToList();
-                                }
-                            }
-                        }
-                    }
+                    Serialization.GetPropertiesFromJSON(jsonMember.ToString(), nameProperty, descriptionProperty, nodeIdProeprty, onlineProperty, ipAssignmentsProperty);
+                    Serialization.PopulateObjectWithJSONProperties(member, false, nameProperty, descriptionProperty, nodeIdProeprty, onlineProperty, ipAssignmentsProperty);
 
-                    networkMembers[network].Add(new Member
-                    {
-                        Name = name,
-                        Description = description,
-                        Online = online,
-                        IPAssignmentsList = ips,
-                        ID = id
-                    });
+                    networkMembers[network].Add(member);
                 }
             }
 
