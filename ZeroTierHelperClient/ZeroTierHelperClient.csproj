@@ -104,6 +104,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\WebHelper\WebHelper.csproj">
+      <Project>{150975F9-92C4-4FED-B2C2-2DFE9C979549}</Project>
+      <Name>WebHelper</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ZeroTierAPI\ZeroTierAPI.csproj">
       <Project>{4e7e4cd4-5988-47c6-aa0a-939adbecee90}</Project>
       <Name>ZeroTierAPI</Name>

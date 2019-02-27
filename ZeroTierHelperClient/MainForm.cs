@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using Network = ZeroTierAPI.Network;
 using Member = ZeroTierAPI.Member;
 using ZeroTierHelperClient.Properties;
+using WebHelper;
 
 #endregion
 
@@ -38,10 +39,8 @@ namespace ZeroTierHelperClient
         {
             base.OnLoad(e);
 
-            if (string.IsNullOrEmpty(Settings.Default.APIToken) == false)
-            {
-                DoRefresh();
-            }
+            // We want to display the data on load, but we don't want to bombard the user with error messages if there are any issues
+            DoRefresh(suppressErrorMessages: true);
         }
 
         /// <summary>
@@ -96,11 +95,14 @@ namespace ZeroTierHelperClient
             Settings.Default.Save();
         }
 
-        private void DoRefresh()
+        private void DoRefresh(bool suppressErrorMessages = false)
         {
             if (string.IsNullOrEmpty(Settings.Default.APIToken))
             {
-                MessageBox.Show(Resources.MissingAPITokenError, Resources.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (suppressErrorMessages == false)
+                {
+                    MessageBox.Show(Resources.MissingAPITokenError, Resources.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
                 return;
             }
 
@@ -113,10 +115,21 @@ namespace ZeroTierHelperClient
                 IDictionary<Network, IList<Member>> networkMembers = ZeroTierAPI.Requests.GetMembers(Settings.Default.APIToken, networks);
                 CreateDataGrids(networkMembers);
             }
-            catch (Exception ex)
+            catch (Exception ex) when (ex is WebRequestException)
             {
-                // If there is any problem retrieving the data, show the user
-                MessageBox.Show(ex.ToString(), Resources.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (suppressErrorMessages == false)
+                {
+                    if ((ex as WebRequestException)?.ErrorCode == 403)
+                    {
+                        // If there is any other problem retrieving the data, show the user
+                        MessageBox.Show(Resources.IncorrectAPIToken, Resources.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        // If there is any other problem retrieving the data, show the user
+                        MessageBox.Show(ex.ToString(), Resources.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
             }
         }
 

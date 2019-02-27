@@ -141,6 +141,9 @@
   <data name="ID" xml:space="preserve">
     <value>ID</value>
   </data>
+  <data name="IncorrectAPIToken" xml:space="preserve">
+    <value>API Token is incorrect.</value>
+  </data>
   <data name="IPAssignments" xml:space="preserve">
     <value>IP Assignments</value>
   </data>

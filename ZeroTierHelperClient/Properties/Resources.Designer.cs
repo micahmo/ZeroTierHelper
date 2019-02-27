@@ -133,6 +133,15 @@ namespace ZeroTierHelperClient.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to API Token is incorrect..
+        /// </summary>
+        internal static string IncorrectAPIToken {
+            get {
+                return ResourceManager.GetString("IncorrectAPIToken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to IP Assignments.
         /// </summary>
         internal static string IPAssignments {
