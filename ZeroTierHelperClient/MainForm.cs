@@ -93,6 +93,7 @@ namespace ZeroTierHelperClient
         {
             new SettingsForm().ShowDialog();
             Settings.Default.Save();
+            DoRefresh(suppressErrorMessages: true);
         }
 
         private void DoRefresh(bool suppressErrorMessages = false)
