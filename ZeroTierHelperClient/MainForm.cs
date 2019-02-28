@@ -39,6 +39,8 @@ namespace ZeroTierHelperClient
         {
             base.OnLoad(e);
 
+            UpgradeSettings();
+
             // We want to display the data on load, but we don't want to bombard the user with error messages if there are any issues
             DoRefresh(suppressErrorMessages: true);
         }
@@ -172,6 +174,16 @@ namespace ZeroTierHelperClient
                         break;
                     }
                 }
+            }
+        }
+
+        private void UpgradeSettings()
+        {
+            if (Settings.Default.UpgradeRequired)
+            {
+                Settings.Default.Upgrade();
+                Settings.Default.UpgradeRequired = false;
+                Settings.Default.Save();
             }
         }
 
