@@ -1,3 +1,5 @@
+<img src="https://i.imgur.com/AEfUaYY.png" alt="drawing" width="75"/>
+
 # ZeroTierHelper
 A Windows thick client for managing ZeroTier networks and members.
 
