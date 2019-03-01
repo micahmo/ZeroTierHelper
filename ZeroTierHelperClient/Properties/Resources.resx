@@ -175,4 +175,16 @@
     <value>Version {0}</value>
     <comment>{0} is the version number</comment>
   </data>
+  <data name="InstallationHelp" xml:space="preserve">
+    <value>While ZeroTier Helper Client may be run as a standalone executable, choosing the "Install" option moves the executable to Program Files and places a shortcut in the Start Menu so that it will behave like an installed application.</value>
+  </data>
+  <data name="ZeroTierHelperClient" xml:space="preserve">
+    <value>ZeroTier Helper Client</value>
+  </data>
+  <data name="InstallMode" xml:space="preserve">
+    <value>ZeroTier Helper Client is currently running in installed mode.</value>
+  </data>
+  <data name="RuntimeMode" xml:space="preserve">
+    <value>ZeroTier Helper Client is currently running in run-time mode.</value>
+  </data>
 </root>

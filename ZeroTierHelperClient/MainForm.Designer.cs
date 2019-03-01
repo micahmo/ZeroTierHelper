@@ -34,6 +34,7 @@
             this.btnRefresh = new System.Windows.Forms.ToolStripButton();
             this.btnHelp = new System.Windows.Forms.ToolStripButton();
             this.tabControlNetworks = new System.Windows.Forms.TabControl();
+            this.btnInstall = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -42,6 +43,7 @@
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnSettings,
             this.btnRefresh,
+            this.btnInstall,
             this.btnHelp});
             resources.ApplyResources(this.toolStrip1, "toolStrip1");
             this.toolStrip1.Name = "toolStrip1";
@@ -73,6 +75,13 @@
             this.tabControlNetworks.Name = "tabControlNetworks";
             this.tabControlNetworks.SelectedIndex = 0;
             // 
+            // btnInstall
+            // 
+            this.btnInstall.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            resources.ApplyResources(this.btnInstall, "btnInstall");
+            this.btnInstall.Name = "btnInstall";
+            this.btnInstall.Click += new System.EventHandler(this.btnInstall_Click);
+            // 
             // MainForm
             // 
             resources.ApplyResources(this, "$this");
@@ -93,6 +102,7 @@
         private System.Windows.Forms.ToolStripButton btnHelp;
         private System.Windows.Forms.ToolStripButton btnRefresh;
         private System.Windows.Forms.TabControl tabControlNetworks;
+        private System.Windows.Forms.ToolStripButton btnInstall;
     }
 }
 

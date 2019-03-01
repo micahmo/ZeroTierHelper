@@ -142,6 +142,24 @@ namespace ZeroTierHelperClient.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to While ZeroTier Helper Client may be run as a standalone executable, choosing the &quot;Install&quot; option moves the executable to Program Files and places a shortcut in the Start Menu so that it will behave like an installed application..
+        /// </summary>
+        internal static string InstallationHelp {
+            get {
+                return ResourceManager.GetString("InstallationHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ZeroTier Helper Client is currently running in installed mode..
+        /// </summary>
+        internal static string InstallMode {
+            get {
+                return ResourceManager.GetString("InstallMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to IP Assignments.
         /// </summary>
         internal static string IPAssignments {
@@ -223,11 +241,29 @@ namespace ZeroTierHelperClient.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ZeroTier Helper Client is currently running in run-time mode..
+        /// </summary>
+        internal static string RuntimeMode {
+            get {
+                return ResourceManager.GetString("RuntimeMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Version {0}.
         /// </summary>
         internal static string VersionNumber {
             get {
                 return ResourceManager.GetString("VersionNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ZeroTier Helper Client.
+        /// </summary>
+        internal static string ZeroTierHelperClient {
+            get {
+                return ResourceManager.GetString("ZeroTierHelperClient", resourceCulture);
             }
         }
     }

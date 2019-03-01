@@ -7,6 +7,8 @@ using Network = ZeroTierAPI.Network;
 using Member = ZeroTierAPI.Member;
 using ZeroTierHelperClient.Properties;
 using WebHelper;
+using System.IO;
+using System.Diagnostics;
 
 #endregion
 
@@ -39,7 +41,7 @@ namespace ZeroTierHelperClient
         {
             base.OnLoad(e);
 
-            UpgradeSettings();
+            VerifyInstallation();
 
             // We want to display the data on load, but we don't want to bombard the user with error messages if there are any issues
             DoRefresh(suppressErrorMessages: true);
@@ -74,7 +76,9 @@ namespace ZeroTierHelperClient
                 string.Format(Resources.VersionNumber, Application.ProductVersion) + Environment.NewLine + Environment.NewLine +
                 Resources.APITokenHelp + Environment.NewLine + Environment.NewLine +
                 Resources.NetworkHelp + Environment.NewLine + Environment.NewLine +
-                Resources.DataHelp);
+                Resources.DataHelp + Environment.NewLine + Environment.NewLine +
+                Resources.InstallationHelp + Environment.NewLine + Environment.NewLine +
+                (IsInstalled() ? Resources.InstallMode : Resources.RuntimeMode));
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
@@ -85,6 +89,11 @@ namespace ZeroTierHelperClient
         private void btnSettings_Click(object sender, EventArgs e)
         {
             ShowSettings();
+        }
+
+        private void btnInstall_Click(object sender, EventArgs e)
+        {
+            DoInstall();
         }
 
         #endregion
@@ -177,15 +186,74 @@ namespace ZeroTierHelperClient
             }
         }
 
-        private void UpgradeSettings()
+        private void VerifyInstallation()
         {
-            if (Settings.Default.UpgradeRequired)
+            if (IsInstalled())
             {
-                Settings.Default.Upgrade();
-                Settings.Default.UpgradeRequired = false;
-                Settings.Default.Save();
+                // We're running from the install directory, hide the Install button
+                btnInstall.Visible = false;
             }
         }
+
+        private bool IsInstalled()
+        {
+            return CurrentApplicationPath.Contains(InstallPath);
+        }
+
+        private void DoInstall()
+        {
+            string[] commands = new string[] {
+                // Make our Program Files directory
+                $"mkdir \"{InstallPath}\"",
+                
+                // Copy the current executable to that directory
+                $"copy \"{CurrentApplicationPath}\" \"{InstallPath}\" /Y",
+
+                // Kill the current process
+                $"taskkill /f /pid {Process.GetCurrentProcess().Id}",
+
+                // Create a shortcut in the Start Menu
+                $"powershell \"$s=(New-Object -COM WScript.Shell).CreateShortcut('{Path.Combine(StartMenuPath, Resources.ZeroTierHelperClient)}.lnk');$s.TargetPath = '{Path.Combine(InstallPath, CurrentApplicationExecutableName)}';$s.Save()\"",
+
+                // Start the process from its new location
+                $"\"{Path.Combine(InstallPath, CurrentApplicationExecutableName)}\"",
+
+                // Wait for the old process to die
+                $"sleep 2",
+
+                // Delete the executable of the old process
+                $"del \"{CurrentApplicationPath}\" /s /f /q",
+            };
+
+            new Process()
+            {
+                StartInfo = new ProcessStartInfo()
+                {
+                    Verb = "runas",
+                    WindowStyle = ProcessWindowStyle.Hidden,
+                    FileName = "cmd.exe",
+                    Arguments = "/C " + string.Join(" & ", commands)
+                }
+            }.Start();
+        }
+
+        #endregion
+
+        #region Readonly fields
+
+        private string InstallPath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), APPLICATION_NAME);
+
+        private string StartMenuPath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), "Programs");
+
+        private string CurrentApplicationPath => new Uri(System.Reflection.Assembly.GetExecutingAssembly().CodeBase).LocalPath;
+
+        private string CurrentApplicationExecutableName => Path.GetFileName(CurrentApplicationPath);
+
+        #endregion
+
+        #region Consts
+
+        private const string APPLICATION_NAME = "ZeroTierHelperClient";
 
         #endregion
     }
