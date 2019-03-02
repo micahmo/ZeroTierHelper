@@ -32,9 +32,12 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnSettings = new System.Windows.Forms.ToolStripButton();
             this.btnRefresh = new System.Windows.Forms.ToolStripButton();
-            this.btnHelp = new System.Windows.Forms.ToolStripButton();
-            this.tabControlNetworks = new System.Windows.Forms.TabControl();
             this.btnInstall = new System.Windows.Forms.ToolStripButton();
+            this.btnHelp = new System.Windows.Forms.ToolStripDropDownButton();
+            this.checkForUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tabControlNetworks = new System.Windows.Forms.TabControl();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -62,12 +65,34 @@
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
+            // btnInstall
+            // 
+            this.btnInstall.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            resources.ApplyResources(this.btnInstall, "btnInstall");
+            this.btnInstall.Name = "btnInstall";
+            this.btnInstall.Click += new System.EventHandler(this.btnInstall_Click);
+            // 
             // btnHelp
             // 
             this.btnHelp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.checkForUpdatesToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.helpToolStripMenuItem});
             resources.ApplyResources(this.btnHelp, "btnHelp");
             this.btnHelp.Name = "btnHelp";
-            this.btnHelp.Click += new System.EventHandler(this.btnHelp_Click);
+            // 
+            // checkForUpdatesToolStripMenuItem
+            // 
+            this.checkForUpdatesToolStripMenuItem.Name = "checkForUpdatesToolStripMenuItem";
+            resources.ApplyResources(this.checkForUpdatesToolStripMenuItem, "checkForUpdatesToolStripMenuItem");
+            this.checkForUpdatesToolStripMenuItem.Click += new System.EventHandler(this.checkForUpdatesToolStripMenuItem_Click);
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            resources.ApplyResources(this.helpToolStripMenuItem, "helpToolStripMenuItem");
+            this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
             // 
             // tabControlNetworks
             // 
@@ -75,12 +100,10 @@
             this.tabControlNetworks.Name = "tabControlNetworks";
             this.tabControlNetworks.SelectedIndex = 0;
             // 
-            // btnInstall
+            // toolStripSeparator1
             // 
-            this.btnInstall.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            resources.ApplyResources(this.btnInstall, "btnInstall");
-            this.btnInstall.Name = "btnInstall";
-            this.btnInstall.Click += new System.EventHandler(this.btnInstall_Click);
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
             // 
             // MainForm
             // 
@@ -99,10 +122,13 @@
         #endregion
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton btnSettings;
-        private System.Windows.Forms.ToolStripButton btnHelp;
         private System.Windows.Forms.ToolStripButton btnRefresh;
         private System.Windows.Forms.TabControl tabControlNetworks;
         private System.Windows.Forms.ToolStripButton btnInstall;
+        private System.Windows.Forms.ToolStripDropDownButton btnHelp;
+        private System.Windows.Forms.ToolStripMenuItem checkForUpdatesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }
 

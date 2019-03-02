@@ -88,6 +88,15 @@ namespace ZeroTierHelperClient.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Would you like to download it now? (The application will close, download the latest version, and re-open.).
+        /// </summary>
+        internal static string DownloadAndInstall {
+            get {
+                return ResourceManager.GetString("DownloadAndInstall", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error.
         /// </summary>
         internal static string Error {
@@ -205,6 +214,15 @@ namespace ZeroTierHelperClient.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There is a new version of ZeroTier Helper Client available ({0})..
+        /// </summary>
+        internal static string NewVersionAvailable {
+            get {
+                return ResourceManager.GetString("NewVersionAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to There are no IP addresses assigned to this member..
         /// </summary>
         internal static string NoIPsAssignedToMember {
@@ -246,6 +264,24 @@ namespace ZeroTierHelperClient.Properties {
         internal static string RuntimeMode {
             get {
                 return ResourceManager.GetString("RuntimeMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ZeroTier Helper Client successfully updated!.
+        /// </summary>
+        internal static string SuccessfullyUpdated {
+            get {
+                return ResourceManager.GetString("SuccessfullyUpdated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ZeroTier Helper Client is up to date!.
+        /// </summary>
+        internal static string UpToDate {
+            get {
+                return ResourceManager.GetString("UpToDate", resourceCulture);
             }
         }
         

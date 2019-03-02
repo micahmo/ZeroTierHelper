@@ -9,6 +9,9 @@ using ZeroTierHelperClient.Properties;
 using WebHelper;
 using System.IO;
 using System.Diagnostics;
+using System.Threading.Tasks;
+using Octokit;
+using Application = System.Windows.Forms.Application;
 
 #endregion
 
@@ -70,7 +73,7 @@ namespace ZeroTierHelperClient
 
         #region Event handlers
 
-        private void btnHelp_Click(object sender, EventArgs e)
+        private void helpToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show(Resources.HelpWindowHeader + Environment.NewLine +
                 string.Format(Resources.VersionNumber, Application.ProductVersion) + Environment.NewLine + Environment.NewLine +
@@ -94,6 +97,11 @@ namespace ZeroTierHelperClient
         private void btnInstall_Click(object sender, EventArgs e)
         {
             DoInstall();
+        }
+
+        private void checkForUpdatesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CheckForUpdates();
         }
 
         #endregion
@@ -193,6 +201,13 @@ namespace ZeroTierHelperClient
                 // We're running from the install directory, hide the Install button
                 btnInstall.Visible = false;
             }
+
+            // Check if there's an OLD exe. If so, let the user know that the update was successful and delete the old EXE.
+            if (File.Exists(CurrentApplicationPath + OLD_EXECUTABLE_EXTENSION))
+            {
+                MessageBox.Show(Resources.SuccessfullyUpdated, Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                File.Delete(CurrentApplicationPath + OLD_EXECUTABLE_EXTENSION);
+            }
         }
 
         private bool IsInstalled()
@@ -202,7 +217,8 @@ namespace ZeroTierHelperClient
 
         private void DoInstall()
         {
-            string[] commands = new string[] {
+            string[] commands =
+            {
                 // Make our Program Files directory
                 $"mkdir \"{InstallPath}\"",
                 
@@ -219,15 +235,64 @@ namespace ZeroTierHelperClient
                 $"\"{Path.Combine(InstallPath, CurrentApplicationExecutableName)}\"",
 
                 // Wait for the old process to die
-                $"sleep 2",
+                $"timeout 1",
 
                 // Delete the executable of the old process
                 $"del \"{CurrentApplicationPath}\" /s /f /q",
             };
 
-            new Process()
+            StartCMDProcess(commands);
+        }
+
+        private void CheckForUpdates()
+        {
+            GitHubClient github = new GitHubClient(new ProductHeaderValue("ZeroTierHelper"));
+            Task<IReadOnlyList<Release>> releases = github.Repository.Release.GetAll("micahmo", "ZeroTierHelper");
+            string latestReleaseTag = releases.Result[0].TagName;
+
+            if (latestReleaseTag == LATEST_RELEASE_TAG)
             {
-                StartInfo = new ProcessStartInfo()
+                MessageBox.Show(Resources.UpToDate, Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                DialogResult dialogResult = MessageBox.Show(string.Format(Resources.NewVersionAvailable, latestReleaseTag) + Environment.NewLine +
+                        Environment.NewLine + Resources.DownloadAndInstall, Text, MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Question);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    // The user chose to install, so initiate that process now.
+                    string downloadUrl = $"https://github.com/micahmo/ZeroTierHelper/releases/download/{latestReleaseTag}/ZeroTierHelperClient.exe";
+                    string[] commands =
+                    {
+                        // Kill the current process
+                        $"taskkill /f /pid {Process.GetCurrentProcess().Id}",
+
+                        // Wait for the process to die before we can rename the exe
+                        $"timeout 1",
+
+                        // Rename the current exe
+                        $"move /y \"{CurrentApplicationPath}\" \"{CurrentApplicationPath + OLD_EXECUTABLE_EXTENSION}\"",
+
+                        // Download the new exe
+                        $"powershell \"[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; Invoke-WebRequest -Uri \"{downloadUrl}\" -OutFile \"{CurrentApplicationPath}\"\"",
+
+                        // Launch the new exe
+                        $"\"{CurrentApplicationPath}\"",
+
+                        // Note: The old exe will be deleted on startup of the new exe
+                    };
+
+                    StartCMDProcess(commands);
+                }
+            }
+        }
+
+        private void StartCMDProcess(params string[] commands)
+        {
+            new Process
+            {
+                StartInfo = new ProcessStartInfo
                 {
                     Verb = "runas",
                     WindowStyle = ProcessWindowStyle.Hidden,
@@ -254,6 +319,10 @@ namespace ZeroTierHelperClient
         #region Consts
 
         private const string APPLICATION_NAME = "ZeroTierHelperClient";
+
+        private const string LATEST_RELEASE_TAG = "v1.6";
+
+        private const string OLD_EXECUTABLE_EXTENSION = "_OLD";
 
         #endregion
     }

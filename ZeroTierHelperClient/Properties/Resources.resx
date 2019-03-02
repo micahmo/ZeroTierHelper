@@ -187,4 +187,17 @@
   <data name="RuntimeMode" xml:space="preserve">
     <value>ZeroTier Helper Client is currently running in run-time mode.</value>
   </data>
+  <data name="UpToDate" xml:space="preserve">
+    <value>ZeroTier Helper Client is up to date!</value>
+  </data>
+  <data name="NewVersionAvailable" xml:space="preserve">
+    <value>There is a new version of ZeroTier Helper Client available ({0}).</value>
+    <comment>{0} is the version number.</comment>
+  </data>
+  <data name="DownloadAndInstall" xml:space="preserve">
+    <value>Would you like to download it now? (The application will close, download the latest version, and re-open.)</value>
+  </data>
+  <data name="SuccessfullyUpdated" xml:space="preserve">
+    <value>ZeroTier Helper Client successfully updated!</value>
+  </data>
 </root>
