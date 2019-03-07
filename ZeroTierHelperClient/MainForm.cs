@@ -159,11 +159,7 @@ namespace ZeroTierHelperClient
 
             foreach (Network network in networks)
             {
-                tabControlNetworks.TabPages.Add(new TabPage
-                {
-                    Text = network.Name + $" ({network.ID})",
-                    Tag = network.ID
-                });
+                tabControlNetworks.TabPages.Add(new NetworkTabPage(network));
             }
 
             if (tabControlNetworks.TabPages.Count > 0)

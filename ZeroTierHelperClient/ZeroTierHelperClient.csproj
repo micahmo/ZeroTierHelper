@@ -72,6 +72,12 @@
     <Compile Include="MemberDataGridView.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="NetworkTabControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NetworkTabPage.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings.cs" />

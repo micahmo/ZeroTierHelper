@@ -200,4 +200,8 @@
   <data name="SuccessfullyUpdated" xml:space="preserve">
     <value>ZeroTier Helper Client successfully updated!</value>
   </data>
+  <data name="CopyValue" xml:space="preserve">
+    <value>Copy "{0}"</value>
+    <comment>{0} is a string value</comment>
+  </data>
 </root>

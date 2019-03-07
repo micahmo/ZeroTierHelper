@@ -70,6 +70,15 @@ namespace ZeroTierHelperClient.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Copy &quot;{0}&quot;.
+        /// </summary>
+        internal static string CopyValue {
+            get {
+                return ResourceManager.GetString("CopyValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This data is static, so at any time you may press Refresh to retrieve the latest data..
         /// </summary>
         internal static string DataHelp {

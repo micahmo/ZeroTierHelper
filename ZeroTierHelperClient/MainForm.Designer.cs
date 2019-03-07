@@ -36,7 +36,7 @@
             this.btnHelp = new System.Windows.Forms.ToolStripDropDownButton();
             this.checkForUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tabControlNetworks = new System.Windows.Forms.TabControl();
+            this.tabControlNetworks = new ZeroTierHelperClient.NetworkTabControl();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -123,7 +123,7 @@
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton btnSettings;
         private System.Windows.Forms.ToolStripButton btnRefresh;
-        private System.Windows.Forms.TabControl tabControlNetworks;
+        private ZeroTierHelperClient.NetworkTabControl tabControlNetworks;
         private System.Windows.Forms.ToolStripButton btnInstall;
         private System.Windows.Forms.ToolStripDropDownButton btnHelp;
         private System.Windows.Forms.ToolStripMenuItem checkForUpdatesToolStripMenuItem;
