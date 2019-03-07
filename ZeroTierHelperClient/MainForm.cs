@@ -271,7 +271,7 @@ namespace ZeroTierHelperClient
                         $"move /y \"{CurrentApplicationPath}\" \"{CurrentApplicationPath + OLD_EXECUTABLE_EXTENSION}\"",
 
                         // Download the new exe
-                        $"powershell \"[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; Invoke-WebRequest -Uri \"{downloadUrl}\" -OutFile \"{CurrentApplicationPath}\"\"",
+                        $"powershell \"[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; Invoke-WebRequest -Uri \'{downloadUrl}\' -OutFile \'{CurrentApplicationPath}\'\"",
 
                         // Launch the new exe
                         $"\"{CurrentApplicationPath}\"",
