@@ -39,9 +39,11 @@ namespace ZeroTierHelperClient
 
         private void InitializeDataBinding()
         {
-            BindingSource apiTokenBindingSource = new BindingSource();
-            apiTokenBindingSource.DataSource = Settings.Default;
-            tbAPIToken.DataBindings.Add("Text", apiTokenBindingSource, "APIToken");
+            BindingSource apiTokenBindingSource = new BindingSource {DataSource = Settings.Default};
+            tbAPIToken.DataBindings.Add(nameof(tbAPIToken.Text), apiTokenBindingSource, nameof(Settings.APIToken));
+
+            BindingSource autoRefreshBindingSource = new BindingSource {DataSource = Settings.Default};
+            cbAutoRefresh.DataBindings.Add(nameof(cbAutoRefresh.Checked), autoRefreshBindingSource, nameof(Settings.AutoRefresh));
         }
 
         #endregion

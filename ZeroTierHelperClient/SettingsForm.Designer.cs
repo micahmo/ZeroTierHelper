@@ -28,11 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsForm));
             this.btnClose = new System.Windows.Forms.Button();
             this.lblAPIToken = new System.Windows.Forms.Label();
             this.tbAPIToken = new System.Windows.Forms.TextBox();
             this.lblAPIInfo = new System.Windows.Forms.LinkLabel();
+            this.lblAutoRefresh = new System.Windows.Forms.Label();
+            this.cbAutoRefresh = new System.Windows.Forms.CheckBox();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // btnClose
@@ -61,10 +65,25 @@
             this.lblAPIInfo.VisitedLinkColor = System.Drawing.Color.Blue;
             this.lblAPIInfo.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblAPIInfo_LinkClicked);
             // 
+            // lblAutoRefresh
+            // 
+            resources.ApplyResources(this.lblAutoRefresh, "lblAutoRefresh");
+            this.lblAutoRefresh.Name = "lblAutoRefresh";
+            this.toolTip.SetToolTip(this.lblAutoRefresh, resources.GetString("lblAutoRefresh.ToolTip"));
+            // 
+            // cbAutoRefresh
+            // 
+            resources.ApplyResources(this.cbAutoRefresh, "cbAutoRefresh");
+            this.cbAutoRefresh.Name = "cbAutoRefresh";
+            this.toolTip.SetToolTip(this.cbAutoRefresh, resources.GetString("cbAutoRefresh.ToolTip"));
+            this.cbAutoRefresh.UseVisualStyleBackColor = true;
+            // 
             // SettingsForm
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.cbAutoRefresh);
+            this.Controls.Add(this.lblAutoRefresh);
             this.Controls.Add(this.lblAPIInfo);
             this.Controls.Add(this.tbAPIToken);
             this.Controls.Add(this.lblAPIToken);
@@ -82,5 +101,8 @@
         private System.Windows.Forms.Label lblAPIToken;
         private System.Windows.Forms.TextBox tbAPIToken;
         private System.Windows.Forms.LinkLabel lblAPIInfo;
+        private System.Windows.Forms.Label lblAutoRefresh;
+        private System.Windows.Forms.CheckBox cbAutoRefresh;
+        private System.Windows.Forms.ToolTip toolTip;
     }
 }

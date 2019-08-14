@@ -48,6 +48,8 @@ namespace ZeroTierHelperClient
 
             // We want to display the data on load, but we don't want to bombard the user with error messages if there are any issues
             DoRefresh(suppressErrorMessages: true);
+
+            StartRefreshTimer();
         }
 
         /// <summary>
@@ -298,6 +300,21 @@ namespace ZeroTierHelperClient
             }.Start();
         }
 
+        private void StartRefreshTimer()
+        {
+            Timer refreshTimer = new Timer {Interval = REFRESH_TIMER_INTERVAL};
+
+            refreshTimer.Tick += (_, __) =>
+            {
+                if (Settings.Default.AutoRefresh)
+                {
+                    DoRefresh(suppressErrorMessages: false);
+                }
+            };
+
+            refreshTimer.Start();
+        }
+
         #endregion
 
         #region Readonly fields
@@ -319,6 +336,8 @@ namespace ZeroTierHelperClient
         private const string LATEST_RELEASE_TAG = "v1.10";
 
         private const string OLD_EXECUTABLE_EXTENSION = "_OLD";
+
+        private const int REFRESH_TIMER_INTERVAL = 60000; // 1 minute in ms
 
         #endregion
     }

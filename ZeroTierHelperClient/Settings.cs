@@ -56,6 +56,11 @@ namespace ZeroTierHelperClient
         /// </summary>
         public string APIToken { get; set; }
 
+        /// <summary>
+        /// Whether to automatically retrieve the latest ZeroTier data at a pre-defined interval
+        /// </summary>
+        public bool AutoRefresh { get; set; }
+
         #endregion
 
         #region Public static methods
