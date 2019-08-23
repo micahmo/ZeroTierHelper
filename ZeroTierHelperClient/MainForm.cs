@@ -333,7 +333,7 @@ namespace ZeroTierHelperClient
 
         private const string APPLICATION_NAME = "ZeroTierHelperClient";
 
-        private const string LATEST_RELEASE_TAG = "v1.10";
+        private const string LATEST_RELEASE_TAG = "v1.11";
 
         private const string OLD_EXECUTABLE_EXTENSION = "_OLD";
 
