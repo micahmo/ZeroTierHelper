@@ -313,7 +313,7 @@ namespace ZeroTierHelperClient
             {
                 if (Settings.Default.AutoRefresh)
                 {
-                    DoRefresh(suppressErrorMessages: false);
+                    DoRefresh(suppressErrorMessages: true);
                 }
             };
 
