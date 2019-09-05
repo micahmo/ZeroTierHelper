@@ -41,7 +41,7 @@ namespace WebHelper
             }
             catch (Exception ex)
             {
-                var errorCodesInMessage = Enum.GetValues(typeof(Codes)).Cast<Codes>().Where(code => ex.ToString().Contains(code.ToString("D")));
+                var errorCodesInMessage = Enum.GetValues(typeof(Codes)).Cast<Codes>().Where(code => ex.ToString().Contains(code.ToString("D"))).ToList();
                 if (errorCodesInMessage.Any())
                 {
                     throw new WebRequestException(string.Format(Properties.Resources.WebRequsetError, url) + Environment.NewLine + Environment.NewLine + ex.ToString(), (int)errorCodesInMessage.ElementAt(0));
