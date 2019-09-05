@@ -9,6 +9,7 @@ using ZeroTierHelperClient.Properties;
 using WebHelper;
 using System.IO;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using Octokit;
 using Application = System.Windows.Forms.Application;
@@ -46,8 +47,7 @@ namespace ZeroTierHelperClient
 
             VerifyInstallation();
 
-            // We want to display the data on load, but we don't want to bombard the user with error messages if there are any issues
-            DoRefresh(suppressErrorMessages: true);
+            DoRefresh();
 
             StartRefreshTimer();
         }
@@ -114,17 +114,17 @@ namespace ZeroTierHelperClient
         {
             new SettingsForm().ShowDialog();
             Settings.Default.Save();
-            DoRefresh(suppressErrorMessages: true);
+            DoRefresh();
         }
 
-        private void DoRefresh(bool suppressErrorMessages = false)
+        private void DoRefresh()
         {
+            // Hide any previous error messages that may be showing
+            HideErrorMessage();
+
             if (string.IsNullOrEmpty(Settings.Default.APIToken))
             {
-                if (suppressErrorMessages == false)
-                {
-                    MessageBox.Show(Resources.MissingAPITokenError, Resources.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                ShowErrorMessage(Resources.MissingAPITokenError);
                 return;
             }
 
@@ -132,25 +132,22 @@ namespace ZeroTierHelperClient
 
             try
             {
-                IEnumerable<Network> networks = ZeroTierAPI.Requests.GetNetworks(Settings.Default.APIToken);
+                List<Network> networks = ZeroTierAPI.Requests.GetNetworks(Settings.Default.APIToken).ToList();
                 CreateTabPages(networks);
                 IDictionary<Network, IList<Member>> networkMembers = ZeroTierAPI.Requests.GetMembers(Settings.Default.APIToken, networks);
                 CreateDataGrids(networkMembers);
             }
             catch (Exception ex) when (ex is WebRequestException webRequestException)
             {
-                if (suppressErrorMessages == false)
+                if (webRequestException.ErrorCode == 403)
                 {
-                    if (webRequestException.ErrorCode == 403)
-                    {
-                        // If there is any other problem retrieving the data, show the user
-                        MessageBox.Show(Resources.IncorrectAPIToken, Resources.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    else
-                    {
-                        // If there is any other problem retrieving the data, show the user
-                        MessageBox.Show(ex.ToString(), Resources.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
+                    // If there is any other problem retrieving the data, show the user
+                    ShowErrorMessage(Resources.IncorrectAPIToken);
+                }
+                else
+                {
+                    // If there is any other problem retrieving the data, show the user
+                    ShowErrorMessage(ex.ToString());
                 }
             }
         }
@@ -192,9 +189,17 @@ namespace ZeroTierHelperClient
             }
         }
 
-        private void ShowErrorMessage()
+        private void HideErrorMessage()
         {
+            errorLabel.Visible = false;
+            tabControlNetworks.Visible = true;
+        }
 
+        private void ShowErrorMessage(string message)
+        {
+            tabControlNetworks.Visible = false;
+            errorLabel.Visible = true;
+            errorLabel.Text = message;
         }
 
         private void VerifyInstallation()
@@ -313,7 +318,7 @@ namespace ZeroTierHelperClient
             {
                 if (Settings.Default.AutoRefresh)
                 {
-                    DoRefresh(suppressErrorMessages: true);
+                    DoRefresh();
                 }
             };
 
