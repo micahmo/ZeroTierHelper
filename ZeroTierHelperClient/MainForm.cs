@@ -137,11 +137,11 @@ namespace ZeroTierHelperClient
                 IDictionary<Network, IList<Member>> networkMembers = ZeroTierAPI.Requests.GetMembers(Settings.Default.APIToken, networks);
                 CreateDataGrids(networkMembers);
             }
-            catch (Exception ex) when (ex is WebRequestException)
+            catch (Exception ex) when (ex is WebRequestException webRequestException)
             {
                 if (suppressErrorMessages == false)
                 {
-                    if ((ex as WebRequestException)?.ErrorCode == 403)
+                    if (webRequestException.ErrorCode == 403)
                     {
                         // If there is any other problem retrieving the data, show the user
                         MessageBox.Show(Resources.IncorrectAPIToken, Resources.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -190,6 +190,11 @@ namespace ZeroTierHelperClient
                     }
                 }
             }
+        }
+
+        private void ShowErrorMessage()
+        {
+
         }
 
         private void VerifyInstallation()
