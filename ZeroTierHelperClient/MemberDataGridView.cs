@@ -82,6 +82,8 @@ namespace ZeroTierHelperClient
             Dock = DockStyle.Fill;
             ReadOnly = true;
             AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
         }
 
         #endregion
