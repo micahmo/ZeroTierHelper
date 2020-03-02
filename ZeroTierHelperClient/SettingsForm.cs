@@ -17,6 +17,7 @@ namespace ZeroTierHelperClient
         {
             InitializeComponent();
             InitializeDataBinding();
+            Icon = Utilities.GetApplicationIcon();
         }
 
         #endregion
