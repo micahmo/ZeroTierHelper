@@ -316,7 +316,7 @@
     <value>tabControlNetworks</value>
   </data>
   <data name="&gt;&gt;tabControlNetworks.Type" xml:space="preserve">
-    <value>ZeroTierHelperClient.NetworkTabControl, ZeroTierHelperClient, Version=1.11.0.0, Culture=neutral, PublicKeyToken=469f08314dcfad6a</value>
+    <value>ZeroTierHelperClient.NetworkTabControl, ZeroTierHelperClient, Version=1.12.0.0, Culture=neutral, PublicKeyToken=469f08314dcfad6a</value>
   </data>
   <data name="&gt;&gt;tabControlNetworks.Parent" xml:space="preserve">
     <value>panel</value>
