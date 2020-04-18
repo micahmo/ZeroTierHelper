@@ -137,18 +137,15 @@ namespace ZeroTierHelperClient
                 IDictionary<Network, IList<Member>> networkMembers = ZeroTierAPI.Requests.GetMembers(Settings.Default.APIToken, networks);
                 CreateDataGrids(networkMembers);
             }
-            catch (Exception ex) when (ex is WebRequestException webRequestException)
+            catch (Exception ex) when (ex is WebRequestException webRequestException && webRequestException.ErrorCode == 403)
             {
-                if (webRequestException.ErrorCode == 403)
-                {
-                    // If there is any other problem retrieving the data, show the user
-                    ShowErrorMessage(Resources.IncorrectAPIToken);
-                }
-                else
-                {
-                    // If there is any other problem retrieving the data, show the user
-                    ShowErrorMessage(ex.ToString());
-                }
+                // If there is a 403, we know that the API token was wrong
+                ShowErrorMessage(Resources.IncorrectAPIToken);
+            }
+            catch (Exception ex)
+            {
+                // If there is any other problem retrieving the data, show the user the exception
+                ShowErrorMessage(ex.ToString());
             }
         }
 
