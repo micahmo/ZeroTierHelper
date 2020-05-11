@@ -10,9 +10,11 @@ using WebHelper;
 using System.IO;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Octokit;
 using Application = System.Windows.Forms.Application;
+using Timer = System.Windows.Forms.Timer;
 
 #endregion
 
@@ -30,6 +32,7 @@ namespace ZeroTierHelperClient
         /// </summary>
         public MainForm()
         {
+            Application.ThreadException += Application_ThreadException;
             InitializeComponent();
         }
 
@@ -75,6 +78,11 @@ namespace ZeroTierHelperClient
 
         #region Event handlers
 
+        private void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
+        {
+            ShowErrorMessage($"{Resources.ThreadException}{e.Exception.Message}", e.Exception.ToString());
+        }
+
         private void helpToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show(Resources.HelpWindowHeader + Environment.NewLine +
@@ -104,6 +112,11 @@ namespace ZeroTierHelperClient
         private void checkForUpdatesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             CheckForUpdates();
+        }
+
+        private void viewDetailsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(string.IsNullOrEmpty(_errorDetails) ? Resources.NoAdditionalDetails : _errorDetails, Resources.ErrorDetails);
         }
 
         #endregion
@@ -145,7 +158,7 @@ namespace ZeroTierHelperClient
             catch (Exception ex)
             {
                 // If there is any other problem retrieving the data, show the user the exception
-                ShowErrorMessage(ex.ToString());
+                ShowErrorMessage(ex.Message, ex.ToString());
             }
         }
 
@@ -192,11 +205,12 @@ namespace ZeroTierHelperClient
             tabControlNetworks.Visible = true;
         }
 
-        private void ShowErrorMessage(string message)
+        private void ShowErrorMessage(string message, string details = "")
         {
             tabControlNetworks.Visible = false;
             errorLabel.Visible = true;
             errorLabel.Text = message;
+            _errorDetails = details;
         }
 
         private void VerifyInstallation()
@@ -321,6 +335,12 @@ namespace ZeroTierHelperClient
 
             refreshTimer.Start();
         }
+
+        #endregion
+
+        #region Private fields
+
+        private string _errorDetails = string.Empty;
 
         #endregion
 

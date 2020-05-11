@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnSettings = new System.Windows.Forms.ToolStripButton();
@@ -40,8 +41,11 @@
             this.panel = new System.Windows.Forms.Panel();
             this.errorLabel = new System.Windows.Forms.Label();
             this.tabControlNetworks = new ZeroTierHelperClient.NetworkTabControl();
+            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.viewDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
             this.panel.SuspendLayout();
+            this.contextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -112,6 +116,7 @@
             // 
             // errorLabel
             // 
+            this.errorLabel.ContextMenuStrip = this.contextMenuStrip;
             resources.ApplyResources(this.errorLabel, "errorLabel");
             this.errorLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.errorLabel.Name = "errorLabel";
@@ -121,6 +126,19 @@
             resources.ApplyResources(this.tabControlNetworks, "tabControlNetworks");
             this.tabControlNetworks.Name = "tabControlNetworks";
             this.tabControlNetworks.SelectedIndex = 0;
+            // 
+            // contextMenuStrip
+            // 
+            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.viewDetailsToolStripMenuItem});
+            this.contextMenuStrip.Name = "contextMenuStrip";
+            resources.ApplyResources(this.contextMenuStrip, "contextMenuStrip");
+            // 
+            // viewDetailsToolStripMenuItem
+            // 
+            this.viewDetailsToolStripMenuItem.Name = "viewDetailsToolStripMenuItem";
+            resources.ApplyResources(this.viewDetailsToolStripMenuItem, "viewDetailsToolStripMenuItem");
+            this.viewDetailsToolStripMenuItem.Click += new System.EventHandler(this.viewDetailsToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -132,6 +150,7 @@
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.panel.ResumeLayout(false);
+            this.contextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -149,6 +168,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.Panel panel;
         private System.Windows.Forms.Label errorLabel;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem viewDetailsToolStripMenuItem;
     }
 }
 
