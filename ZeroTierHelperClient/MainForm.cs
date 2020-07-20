@@ -164,6 +164,7 @@ namespace ZeroTierHelperClient
 
         private void CreateTabPages(IEnumerable<Network> networks)
         {
+            tabControlNetworks.TabPages.OfType<TabPage>().ToList().ForEach(p => p.Dispose());
             tabControlNetworks.TabPages.Clear();
 
             foreach (Network network in networks)
